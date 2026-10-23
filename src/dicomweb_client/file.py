@@ -3346,6 +3346,8 @@ class DICOMfileClient:
                 )
             )
             image = Image.fromarray(array)
+            if codec_name == "png" and image.mode == "I":
+                image = image.convert("I;16")
             with io.BytesIO() as fp:
                 image.save(fp, codec_name, **codec_kwargs)  # type: ignore
                 fp.seek(0)
@@ -3912,6 +3914,8 @@ class DICOMfileClient:
                 )
             )
             image = Image.fromarray(array)
+            if codec_name == "png" and image.mode == "I":
+                image = image.convert("I;16")
             with io.BytesIO() as fp:
                 image.save(fp, codec_name, **codec_kwargs)  # type: ignore
                 fp.seek(0)
